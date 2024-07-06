@@ -26,6 +26,14 @@ body {
   box-shadow: 0 20px 40px rgba(38, 33, 61, 0.2);
 }
 
+.container h1 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-bottom: 25px;
+  color: rgb(86, 147, 212);
+}
+
 .search-box {
   width: 100%;
   display: flex;
