@@ -105,4 +105,6 @@ body {
 .error {
   margin-top: 80px;
   text-align: center;
+  font-size: 14px;
+  color: red;
 }

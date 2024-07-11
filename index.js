@@ -31,17 +31,28 @@ btn.addEventListener("click", async () => {
           ${data[0].meanings[0].definitions[0].definition}
       </p>
       <p class="word-example">
-          ${data[0].meanings[0].definitions[0].example || ""}
+          ${
+            data[0].meanings[0].definitions[0].example ||
+            "Sorry, Couldn't produce example of the word you entered"
+          }
       </p>`;
 
-    // Check if phonetics array has at least one element and if the audio is available
+    // Iterate through phonetics array and find the first non-empty audio URL
     let audioSrc = "";
-    if (data[0].phonetics.length > 0) {
+    for (let i = 0; i < data[0].phonetics.length; i++) {
+      if (data[0].phonetics[i].audio) {
+        audioSrc = data[0].phonetics[i].audio;
+        break;
+      }
+    }
+
+    //Check if one element has value and if the audio is available , functioning but have an error if the audio is an open string
+    /*if (data[0].phonetics.length > 0) {
       audioSrc = data[0].phonetics[0].audio || "";
       if (!audioSrc && data[0].phonetics.length > 1) {
         audioSrc = data[0].phonetics[1].audio || "";
       }
-    }
+    }*/
 
     if (audioSrc) {
       sound.setAttribute("src", audioSrc);
@@ -51,7 +62,9 @@ btn.addEventListener("click", async () => {
 
     console.log(sound);
   } catch (error) {
-    result.innerHTML = `<h3 class="error">Couldn't Find The Word</h3>`;
+    result.innerHTML = `<h2 class="error">Sorry pal, I couldn't find definitions for the word you were looking for.
+    You can try the search again at later time or head to the web instead.
+</h2>`;
     console.log(error);
   }
 });
